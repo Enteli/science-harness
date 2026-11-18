@@ -14,7 +14,7 @@ discoverphysics = ["numpy>=1.24", "scipy>=1.9", "jax>=0.4.30"]
 physics-comparison = [
     "numpy==2.0.2",
     "scipy==1.13.1",
-    "jax==0.4.30",
+    "jax==0.6.2",
     "jaxlib==0.4.30",
     "requests>=2.25",
     "tiktoken==0.12.0",
