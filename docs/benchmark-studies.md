@@ -21,6 +21,8 @@ science-harness bench run my-study.json --dry-run
 
 Validation/dry-run make no acquisitions, panels or model calls. For SDK location
 and credentials, see [models and tools](models-and-tools.md#copilot-sdk-location).
+The generated [single-run example](../configs/discoverphysics-external-notebook.json)
+shows the editable benchmark, model, seeds, arms and limits.
 
 ## Run and inspect
 

@@ -22,7 +22,8 @@ def example(name="spring-offline"):
     return json.loads((ROOT / "configs" / f"{name}.json").read_text())
 
 
-@pytest.mark.parametrize("name", ["spring-offline", "discoverphysics-memory-advisor", "newtonbench-reference"])
+@pytest.mark.parametrize("name", ["spring-offline", "discoverphysics-memory-advisor",
+                                  "discoverphysics-external-notebook", "newtonbench-reference"])
 def test_examples_validate_without_initializing_resources(name, monkeypatch):
     from science_harness.benchmarks.discoverphysics import DiscoverPhysicsAdapter
 

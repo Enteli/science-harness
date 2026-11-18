@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "benchmark": "discoverphysics",
+  "protocol": "native-trajectory-v1",
+  "worlds": [
+    "yukawa"
+  ],
+  "seeds": [
+    12345
+  ],
+  "model": {
+    "provider": "copilot",
+    "id": "gpt-6.1-sol"
+  },
+  "limits": {
+    "requests": 100,
+    "observations": 50,
+    "credits": 1000
+  },
+  "parameters": {
+    "checkout": ".cache/DiscoverPhysics",
+    "cli_version": "1.0.103-0",
+    "position_scale": {
+      "yukawa": 0.3732285059350784
+    }
+  },
+  "arms": [
+    {
+      "name": "external-notebook",
+      "memory": "external",
+      "advisor": "off",
+      "selection": "active",
+      "profile": "memory-advisor-v1"
+    }
+  ]
+}

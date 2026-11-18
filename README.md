@@ -49,6 +49,9 @@ science-harness bench validate my-study.json
 science-harness bench run my-study.json --dry-run
 ```
 
+`my-study.json` is the editable run configuration:
+[see a single-run example](configs/discoverphysics-external-notebook.json).
+
 The default is external notebook with agent-selected experiments. DiscoverPhysics
 also supports `--memory full-history`, `--review`, or `--random`. Random changes
 experiment selection, not the scientist; review is separately charged.
@@ -68,7 +71,8 @@ fallback. Every run needs a new output directory.
 
 ## Reuse and extend
 
-- [Architecture](docs/architecture.md), [adding a benchmark](docs/adding-a-benchmark.md),
+- [CLI and configuration](docs/cli.md), [architecture](docs/architecture.md),
+  [adding a benchmark](docs/adding-a-benchmark.md),
   and [models/tools](docs/models-and-tools.md).
 - [Zero-API NewtonBench reference](docs/second-integration.md), separate from the live pilot.
 - [Contributing](CONTRIBUTING.md), [security](SECURITY.md), and [publishing](docs/publishing.md).
