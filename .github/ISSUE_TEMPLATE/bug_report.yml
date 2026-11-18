@@ -1,0 +1,19 @@
+name: Bug report
+description: Report a reproducible harness problem without private data.
+body:
+  - type: textarea
+    attributes:
+      label: Reproduction
+      description: Include a minimal offline example and expected versus actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Versions and protocol
+      description: Python, OS, harness version, benchmark revision, model/provider and policy profile.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Sanitized diagnostics
+      description: Never attach credentials, private panels, proprietary measurements or raw provider logs.

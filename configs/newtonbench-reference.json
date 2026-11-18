@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "benchmark": "newtonbench",
+  "protocol": "scientist-hooke-reference-v1",
+  "worlds": ["vanilla_equation"],
+  "seeds": [0],
+  "model": {"provider": "baseline", "id": "reference"},
+  "limits": {"requests": 12, "observations": 8, "credits": 0},
+  "parameters": {"checkout": ".cache/NewtonBench"},
+  "arms": [{"name": "reference", "memory": "none", "profile": "reference-v1"}]
+}

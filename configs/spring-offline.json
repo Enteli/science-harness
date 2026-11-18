@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "benchmark": "spring",
+  "protocol": "scientist-reference-v1",
+  "worlds": ["noise"],
+  "seeds": [0, 1],
+  "model": {"provider": "baseline", "id": "reference"},
+  "limits": {"requests": 12, "observations": 8, "credits": 0},
+  "arms": [
+    {"name": "reference", "memory": "none", "profile": "reference-v1"}
+  ]
+}

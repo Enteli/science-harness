@@ -1,0 +1,7 @@
+include LICENSE THIRD_PARTY_NOTICES.md SECURITY.md CONTRIBUTING.md CITATION.cff
+include package.json package-lock.json
+recursive-include docs *.md *.json
+recursive-include configs *.json
+recursive-include examples *.py
+recursive-include tests *.py
+recursive-include science_harness *.mjs

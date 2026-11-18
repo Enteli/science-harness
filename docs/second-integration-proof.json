@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "scope": "real-newtonbench-notebook-reference-integration",
+  "harness_distribution": "science-harness",
+  "harness_version": "0.8.0",
+  "python_namespace": "science_harness",
+  "benchmark": "NewtonBench",
+  "upstream_repository": "https://github.com/HKUST-KnowComp/NewtonBench",
+  "upstream_revision": "912a4ba5f4356ddd06acc16e44460ca30be4abc2",
+  "upstream_code_license": "MIT",
+  "protocol": "scientist-hooke-reference-v1",
+  "profile": "notebook-reference-v1",
+  "task": {
+    "module": "m9_hooke_law",
+    "difficulty": "easy",
+    "system": "vanilla_equation",
+    "law_version": "v0",
+    "noise": 0.01,
+    "seed": 0
+  },
+  "policy": "deterministic power-law reference plus explicit notebook write and read",
+  "simulator_mocked": false,
+  "llm_discovery_result": false,
+  "model_api_calls": 0,
+  "policy_decisions": 9,
+  "instrument_acquisitions": 6,
+  "sensor_readings": 54,
+  "notebook_writes": 1,
+  "notebook_reads": 1,
+  "resource_limit_acquisitions": 8,
+  "charged_acquisitions": 6,
+  "evaluation": {
+    "metric": "custom-newton-predictive-v1",
+    "official_newtonbench_score": false,
+    "held_out_points": 500,
+    "relative_rmse": 0.003783045721813121,
+    "threshold": 0.05,
+    "passed": true,
+    "not_supplied_to_policy_or_public_notebook": true
+  },
+  "trusted_simulator_worker_drained": true,
+  "integration_test_seeds": [0, 42],
+  "integration_tests_passed": 2,
+  "recorded_run_artifact_sha256": {
+    "study.json": "dc119eb6f1f15b5af2851dae03b53065320642ddebdfd033b317125c27c2f82b",
+    "episode-result.json": "e896dd9649ae54c598d7f912a9b4b2dfcade07b48018e01fb75cacb5e03074d5",
+    "lab-notebook.md": "c6c59ba19632a725f74bc7c387e76203cd488f7c9e3d66d0ddb4801053870212"
+  },
+  "limitations": [
+    "One restricted easy Hooke-law configuration, not the complete 324-task suite",
+    "Fixed reference family and sampling plan, not LLM scientific capability",
+    "Custom numerical evaluator, not the upstream symbolic/LLM judge",
+    "No memory-policy advantage, model comparison or cross-domain intelligence claim",
+    "No external model weights or separately fetched dataset used",
+    "Runtime UUIDs and timestamps vary; reproduce outcomes and contracts, not raw-log byte identity"
+  ]
+}

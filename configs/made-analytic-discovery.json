@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "benchmark": "made",
+  "protocol": "scientist-made-analytic-v1",
+  "worlds": ["lj-crystal"],
+  "seeds": [20261118],
+  "model": {"provider": "copilot", "id": "claude-opus-5.5"},
+  "limits": {"requests": 24, "observations": 12, "credits": 1500},
+  "parameters": {
+    "checkout": ".cache/MADE",
+    "worker_python": ".cache/made-analytic-env/bin/python",
+    "cli_version": "1.0.103-0"
+  },
+  "arms": [{"name": "external-notebook", "memory": "external", "profile": "notebook-discovery-v1"}]
+}

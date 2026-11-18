@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Cite the software version and the applicable benchmark papers separately."
+title: "Science Harness: an external-notebook science agent harness"
+type: software
+version: 0.9.1
+license: MIT
+authors:
+  - name: AiScience contributors
+references:
+  - type: software
+    title: NewtonBench
+    authors:
+      - name: NewtonBench contributors
+    url: https://github.com/HKUST-KnowComp/NewtonBench
+    version: 912a4ba5f4356ddd06acc16e44460ca30be4abc2
+  - type: software
+    title: DiscoverPhysics
+    authors:
+      - name: DiscoverPhysics contributors
+    url: https://github.com/SampsonML/DiscoverPhysics
+    version: 33b7fa9df96de9c35744efd181ca7e5a8dd60ad5
