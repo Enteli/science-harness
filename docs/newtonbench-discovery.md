@@ -1,16 +1,14 @@
 # NewtonBench: model-led discovery
 
-This profile uses the real pinned NewtonBench simulator and the existing
-`Scientist`, `BookStore` and trusted analysis tools. Unlike the
-[deterministic reference proof](second-integration.md), a model chooses the
-experiments, notebook operations, analyses and final expression. There is no
-reference-policy fallback or built-in answer supplied to the model.
+The generic `Scientist` chooses experiments, analyses and a final energy-law
+expression against the real NewtonBench simulator. No answer or reference-policy
+fallback is supplied. The [scripted reference proof](second-integration.md) is separate.
 
 ## Scope and setup
 
-The versioned `newtonbench-discovery` integration currently supports one
-`m9_hooke_law` configuration: easy, `vanilla_equation`, law version `v1`,
-measurement noise 0.01. It is not the complete NewtonBench suite.
+Scope: `m9_hooke_law`, easy, `vanilla_equation`, law `v1`, noise 0.01.
+This is not the complete NewtonBench suite. Run from a source checkout with
+cached Copilot CLI `1.0.103-0` and model access:
 
 ```bash
 python -m pip install -e '.[analysis,newtonbench]'
@@ -22,39 +20,32 @@ science-harness bench validate newton-agent.json
 science-harness bench run newton-agent.json --dry-run
 ```
 
-Inspect the model, cached CLI version and limits before approving a paid run:
+Inspect the generated config, then approve a NEW paid run:
 
 ```bash
 science-harness bench run newton-agent.json \
   --output artifacts/newton-agent --approve-credits 1500
 ```
 
-The default is one external-notebook run, at most 24 model decisions and
-12 started instrument calls. A call may request repeated sensor readings;
-those readings are not independent instrument acquisitions. The model can fit
-or calculate with the harness-owned safe analysis interface; arbitrary Python
-execution is not exposed. A concluded result requires a frozen candidate,
-a new acquisition, and an observed-data predictive check before finishing.
+Defaults: external notebook, 24 model decisions, 12 started instrument calls,
+1,500-credit maximum. The cap is **not an expected price**. Repeated readings
+within a call are not independent acquisitions. Fitting/calculation uses trusted
+analysis tools, not arbitrary Python. Before a concluded finish, the model must
+freeze a candidate and check it against a new acquisition.
 
 ## Evaluation and audit
 
-After the investigator finishes, a separate trusted simulator worker evaluates
-the frozen arithmetic expression on 500 clean held-out points. The existing
-`custom-newton-predictive-v1` relative-RMSE threshold is 0.05. This is not
-NewtonBench's official symbolic/LLM judge. No evaluation score, hidden law or
-held-out point enters the scientist context or public lab notebook.
+After finish, the trusted worker evaluates the frozen expression on 500 clean
+held-out points. `custom-newton-predictive-v1` requires relative RMSE below 0.05;
+it is **not NewtonBench's official symbolic/LLM score**. Hidden laws, points and
+grades never enter scientist context or the public notebook.
 
-Each decision uses a fresh initialized zero-tool Copilot context; only the
-generic scientist's public context and explicit notebook retrieval carry
-scientific memory. The study keeps source snapshots, full outgoing packets,
-provider quotes, conservative pre-dispatch reservations, authoritative
-settlements and owned-session shutdown evidence. A failed or ambiguous paid
-request retains its full reservation and stops the study; there is no automatic
-transport retry, model substitution or best-law restoration.
-The pinned Copilot runtime requests up to 32,000 output tokens; its input
-allowance is 32,768. This is a declared transport allowance, not a promise that
-each short JSON decision will consume that many tokens.
+Every decision uses a fresh, initialized zero-host-tool context. Sources,
+packets, measurements, charges and shutdown evidence are retained. Ambiguous
+charges keep their reservations and stop the study: no automatic transport
+retry, model substitution or best-law restoration. Transport allowances are
+32,768 input and 32,000 output tokens, not expected consumption.
 
-The 1,500-credit example is a new ceiling, not an expected charge or a transfer
-from an older experiment. One successful attempt would demonstrate this
-restricted integration, not broad discovery ability or a memory-policy effect.
+See [the recorded pilot](crossbench-results.md) and
+[SDK setup](models-and-tools.md#copilot-sdk-location). One successful attempt is
+an integration check, not a discovery success rate or memory-policy effect.
