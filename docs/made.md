@@ -1,41 +1,32 @@
 # MADE: controlled CPU analytic optimization
 
-This integration uses MADE's real `AnalyticOracle` (ASE Lennard-Jones potential)
-and `Environment` extension interface at revision
-`bffda0c9a1fa1904b35c0ef67b455881c975df86`. The model selects crystal
-prototypes and lattice constants, observes energies, records a notebook and
-submits a measured candidate through the same generic `Scientist` loop.
+The generic `Scientist` chooses crystal cells using MADE's real `AnalyticOracle`
+(ASE Lennard-Jones) and `Environment` extension API at
+`bffda0c9a1fa1904b35c0ef67b455881c975df86`.
 
-**This is an explicitly controlled optimization test, not MADE's Materials
-Project/convex-hull paper benchmark and not discovery of a new real material.**
-It requires no Materials Project key, external material dataset, pretrained
-weights, GPU, generative model or hosted energy oracle.
+**This is controlled simulated optimization, not MADE's Materials Project/paper
+benchmark or a new real material.** No external dataset, API key, pretrained
+weights or GPU is needed.
 
 ## Task
 
-The candidate space is a single species labelled Ar, prototypes `sc`, `bcc`
-and `fcc`, and cubic lattice constant `a` in [1.2, 3.0]. The potential is not
-calibrated to real argon. The upstream oracle evaluates fixed coordinates
-without relaxing the structure; the objective is potential energy **per atom**,
-not total energy across cells with different atom counts.
+Choose `sc`, `bcc` or `fcc` and a cubic lattice constant `a` in [1.2, 3.0].
+The species label Ar is not a calibration to real argon. Coordinates stay
+fixed: minimize potential energy **per atom**, without automatic relaxation.
+Our small environment and local-dataset subclasses use actual upstream oracle
+energies, not mocked responses or Materials Project access.
 
-This repository supplies a small `Environment` subclass and a controlled local
-`PhaseDiagramDataset` subclass; the latter does not call Materials Project.
-It does not replace the oracle or return cached/hand-authored energies.
-
-After finish, private numerical searches over all three prototypes establish a
-reference minimum. Success requires relative energy regret at most 0.01,
-improvement over the declared `sc, a=3.0` baseline, and a final candidate the
-scientist actually measured. These are our custom
-`controlled-made-lj-regret-v1` criteria, not AF, EF, AUDC or mSUN.
-Private reference-oracle calls are reported separately from the agent's
-measurement budget; no private optimum or grade is fed back to the scientist.
+After finish, a private numerical search supplies the reference. Success means
+relative regret at most 0.01, improvement over `sc, a=3.0`, and submission of an
+actually measured candidate. `controlled-made-lj-regret-v1` is our metric, not
+AF/EF/AUDC/mSUN. Private reference calls are counted separately from agent
+queries; neither the optimum nor the grade reaches the scientist.
 
 ## Isolated setup
 
-The harness core remains Python 3.9 compatible. MADE's pinned source requires
-Python 3.12; keep this environment separate from the native physics dependencies.
-For example, with `uv` available:
+Use Python 3.12 for the MADE worker, separate from the host/native physics
+environment. From a source checkout, with `uv`, Node and cached Copilot CLI
+`1.0.103-0` available:
 
 ```bash
 python -m pip install -e '.[analysis]'
@@ -52,36 +43,28 @@ science-harness bench validate made-agent.json
 science-harness bench run made-agent.json --dry-run
 ```
 
-Inspect the config and authorize a NEW paid run explicitly:
+Inspect the config before approving a NEW paid run:
 
 ```bash
 science-harness bench run made-agent.json \
   --output artifacts/made-agent --approve-credits 1500
 ```
 
-The default limits are 24 model decisions, 12 agent-facing measurements and
-a separate 1,500-credit maximum. The policy is external notebook, active
-selection, no reviewer. The fresh zero-tool SDK contexts, accounting and
-no-retry behavior are the same as the [NewtonBench discovery profile](newtonbench-discovery.md).
+Defaults: external notebook, active selection, no reviewer; 24 model decisions,
+12 agent queries and a separate **1,500-credit maximum, not expected spending**.
+Fresh zero-host-tool contexts and no-retry accounting follow the
+[NewtonBench profile](newtonbench-discovery.md). See
+[SDK setup](models-and-tools.md#copilot-sdk-location) and [pilot results](crossbench-results.md).
 
 ## Import and execution boundary
 
-The pinned MADE package initializers eagerly import unrelated generative and
-GPU-oracle stacks, even for an analytic oracle. The trusted worker therefore
-registers only six fixed source namespaces and imports the actual, unmodified
-upstream analytic oracle, base environment and dataset modules from the clean
-pinned checkout. It deliberately does not execute those eager registry
-initializers. This compatibility loader is explicit and version-bound, not
-a fake oracle, substitute energy formula or altered upstream source file.
+The pinned package eagerly imports unrelated generative/GPU stacks. A fixed
+six-namespace loader skips those registries while importing the **unmodified**
+oracle, base environment and dataset modules.
 
-The worker interpreter is an operator-configured trusted Python environment,
-never a model-selected executable. Install the same harness release into that
-environment; startup verifies the worker's source hash. The launcher preserves
-the virtual-environment interpreter path and does not inject another Python
-version's site-packages into it. On macOS its network access is denied;
-credentials are excluded from its environment and CPU thread limits are one.
-It is a trusted simulator subprocess, **not an adversarial-code sandbox**.
-No model-generated Python is executed.
-
-MADE code is MIT. ASE and other optional dependencies retain their own licenses.
-The benchmark code and datasets are not bundled in the source export.
+Install the same harness release in the trusted worker environment; startup
+checks its source hash. The launcher preserves its interpreter and site-packages,
+strips credentials, limits CPU threads to one, and denies network on macOS.
+It is **not an adversarial-code sandbox**; no model-generated Python executes.
+MADE code is MIT; ASE and other dependencies keep their own terms. Upstream code
+and datasets are not bundled.
