@@ -3,7 +3,7 @@
     ".github/ISSUE_TEMPLATE/bug_report.yml": "f2c4bd3f759805b30482fdef9237c220ad52e4c754cd4f589062b25e5d173778",
     ".github/dependabot.yml": "4b75ba7f0193ba2ade16a52a7b84501eb5f829dbecf7ed3b6352235aaccecacc",
     ".github/workflows/newtonbench-integration.yml": "09546aec4567713e42a2c2004bff4a68fdaf36851f3401063273349aff23073a",
-    ".github/workflows/tests.yml": "aa82ec94e12ac832d394831234bb70c5b614006d0aa48ac1de07d4a4826e406b",
+    ".github/workflows/tests.yml": "cf6d97e627f2790858053236e4ef091813d46562fa8764c29f850a17611de8dd",
     ".gitignore": "14528bd0afe4c0c3b2f9cea5c075505ad416b843bc416045cde7c61ca99b6423",
     "CITATION.cff": "cbf3caf5a6a7c46ddba5c98a6ccaac2f44a5a4055537be9f088ace3abfa3720f",
     "CONTRIBUTING.md": "1cb11f8210e980d23e99142aa464fab7bdbccd9b1c136b90cea36bbef12b9dcd",

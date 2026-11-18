@@ -4,12 +4,17 @@ permissions:
   contents: read
 jobs:
   core:
-    runs-on: ubuntu-latest
+    name: core (${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        python: ["3.9", "3.12"]
+        include:
+          - python: "3.9"
+            os: ubuntu-22.04
+          - python: "3.12"
+            os: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
